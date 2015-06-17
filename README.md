@@ -39,6 +39,7 @@ You need PHP >= 5.3 to use AltoRouter.
 - [Koen Punt](https://github.com/koenpunt)
 - [John Long](https://github.com/adduc)
 - [Niahoo Osef](https://github.com/niahoo)
+- [Werner Schwarz](https://github.com/slup)
 
 ## License
 

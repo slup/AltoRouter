@@ -151,6 +151,7 @@ class AltoRouter {
 
 		$params = array();
 		$match = false;
+        $query_parameters = array();
 
 		// set Request Url if it isn't passed as parameter
 		if($requestUrl === null) {
@@ -162,6 +163,20 @@ class AltoRouter {
 
 		// Strip query string (?a=b) from Request Url
 		if (($strpos = strpos($requestUrl, '?')) !== false) {
+			
+			$query_strings = substr($requestUrl, $strpos + 1);
+            if (strlen($query_strings) > 0) {
+                $query_array = explode('&', $query_strings);
+                foreach($query_array as $query_string) {
+                    if (strpos($query_string, '=') !== false) {
+                        list($key, $value) = explode('=', $query_string);
+                        $query_parameters[$key] = $value;
+                    } else {
+                        $query_parameters[$query_string] = "";
+                    }
+                }
+            }
+			
 			$requestUrl = substr($requestUrl, 0, $strpos);
 		}
 
@@ -238,7 +253,8 @@ class AltoRouter {
 				return array(
 					'target' => $target,
 					'params' => $params,
-					'name' => $name
+					'name' => $name,
+                    'query_parameters' => $query_parameters
 				);
 			}
 		}
